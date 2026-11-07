@@ -1,0 +1,318 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Smart ECOcontrol",
+        "description": "IP address of the Smart ECOcontrol box on the network Home Assistant is connected to (the box must be reachable from Home Assistant).",
+        "data": {
+          "host": "Box IP address"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot reach the box at this address.",
+      "invalid_response": "This address answers, but it is not a recognised Smart ECOcontrol box.",
+      "unknown": "Unexpected error, see the logs."
+    },
+    "abort": {
+      "already_configured": "This box is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Smart ECOcontrol options",
+        "data": {
+          "scan_interval": "Refresh interval (seconds)",
+          "derogation_hours": "Default override duration (hours, at most until midnight)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "climate": {
+      "radiator": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "none": "Schedule",
+              "frost_protection": "Frost protection"
+            }
+          }
+        }
+      }
+    },
+    "binary_sensor": {
+      "window_open": {
+        "name": "Window open"
+      },
+      "communication_problem": {
+        "name": "Communication problem"
+      },
+      "update_available": {
+        "name": "Update available"
+      }
+    },
+    "select": {
+      "planning": {
+        "name": "Heating schedule"
+      }
+    },
+    "sensor": {
+      "allure": {
+        "name": "Mode",
+        "state": {
+          "eco": "Eco",
+          "comfort_minus_2": "Comfort -2",
+          "comfort_minus_1": "Comfort -1",
+          "comfort": "Comfort",
+          "off": "Off",
+          "frost_protection": "Frost protection",
+          "comfort_plus_1": "Comfort +1"
+        }
+      },
+      "vacation_until": {
+        "name": "Heating resumes"
+      }
+    },
+    "switch": {
+      "vacation": {
+        "name": "Vacation mode"
+      }
+    }
+  },
+  "exceptions": {
+    "communication_error": {
+      "message": "Communication error with the box: {error}"
+    },
+    "setpoint_not_settable": {
+      "message": "Cannot change the setpoint: the room must be in Auto mode on the Comfort level (Smart button on the device) and not use a pilot wire."
+    },
+    "room_selection_lost": {
+      "message": "Command cancelled for safety: the box no longer targets this room (a web interface page open elsewhere changes the selected room). Close the box's web pages and try again."
+    },
+    "setpoint_out_of_range": {
+      "message": "Setpoint {requested} °C refused: the box only accepts {minimum} to {maximum} °C around the preferred temperature."
+    },
+    "derogation_unavailable": {
+      "message": "Override \"{kind}\" is not possible in the room's current mode (mode {mode}). Outside Auto mode the box only allows frost protection, and nothing in Off or Frost mode."
+    },
+    "derogation_unknown": {
+      "message": "Unknown override: {kind}."
+    },
+    "hvac_mode_physical": {
+      "message": "The mode cannot be changed remotely: use the Smart button on the device. Remotely, only the setpoint, overrides and schedule can be changed."
+    },
+    "planning_unknown": {
+      "message": "Unknown schedule: {planning}."
+    },
+    "vacation_date_invalid": {
+      "message": "Invalid resume date ({date}): it must be after today (box time) and within the next 12 months."
+    },
+    "config_entry_missing": {
+      "message": "No Smart ECOcontrol box is loaded."
+    },
+    "config_entry_ambiguous": {
+      "message": "Several Smart ECOcontrol boxes: choose one with config_entry_id."
+    },
+    "time_invalid": {
+      "message": "Invalid time: {value} (HH:MM format, in 15-minute steps, from 00:00 to 24:00)."
+    },
+    "planning_no_schedule": {
+      "message": "“Sans planning” has no ranges: a room using it follows no schedule."
+    },
+    "planning_selection_lost": {
+      "message": "Write cancelled for safety: the box no longer describes this schedule (a web interface page opened elsewhere changes the displayed schedule). Close the box pages and try again."
+    },
+    "schedule_too_many_ranges": {
+      "message": "At most {maximum} comfort ranges per day."
+    },
+    "schedule_range_invalid": {
+      "message": "Invalid comfort range ({range}): the end must follow the start, between 00:00 and 24:00."
+    },
+    "schedule_range_too_short": {
+      "message": "Comfort range too short ({range}): 1 hour minimum."
+    },
+    "schedule_ranges_too_close": {
+      "message": "Comfort ranges too close ({range}): at least 1 hour between two ranges, no overlap."
+    },
+    "schedule_day_invalid": {
+      "message": "Invalid day: {day}."
+    },
+    "schedule_not_applied": {
+      "message": "The box did not apply the change (day {day}: requested {expected}, read back {found}). Try again and check the schedule on the box."
+    },
+    "planning_name_invalid": {
+      "message": "Invalid schedule name: letters, digits and spaces only, {maximum} characters at most."
+    },
+    "planning_name_taken": {
+      "message": "A schedule is already named “{name}”."
+    },
+    "planning_limit": {
+      "message": "The box only handles {maximum} schedules (including “Sans planning”)."
+    },
+    "planning_not_applied": {
+      "message": "The box did not take the schedule change into account. Try again or check on the box."
+    },
+    "planning_protected": {
+      "message": "“Sans planning” is the default schedule: it cannot be renamed or deleted."
+    },
+    "planning_in_use": {
+      "message": "Schedule “{planning}” is still used by: {rooms}. Give those rooms another schedule first."
+    }
+  },
+  "selector": {
+    "derogation_allure": {
+      "options": {
+        "eco": "Eco",
+        "comfort": "Comfort",
+        "frost": "Frost protection"
+      }
+    },
+    "weekday": {
+      "options": {
+        "mon": "Monday",
+        "tue": "Tuesday",
+        "wed": "Wednesday",
+        "thu": "Thursday",
+        "fri": "Friday",
+        "sat": "Saturday",
+        "sun": "Sunday"
+      }
+    }
+  },
+  "services": {
+    "set_derogation": {
+      "name": "Force a mode (override)",
+      "description": "Temporarily forces a room's mode, at most until midnight.",
+      "fields": {
+        "allure": {
+          "name": "Mode",
+          "description": "Mode to apply."
+        },
+        "duration": {
+          "name": "Duration",
+          "description": "Duration in hours. Default: the duration set in the integration options."
+        }
+      }
+    },
+    "cancel_derogation": {
+      "name": "Cancel override",
+      "description": "Removes the current override and goes back to the schedule."
+    },
+    "set_vacation": {
+      "name": "Schedule vacation",
+      "description": "Puts every radiator in frost protection until the chosen date, then resumes heating.",
+      "fields": {
+        "until": {
+          "name": "Heating resumes",
+          "description": "Date heating resumes (tomorrow at the earliest, within 12 months)."
+        }
+      }
+    },
+    "get_planning": {
+      "name": "Read a schedule",
+      "description": "Returns the list of schedules and, if one is given, its comfort ranges (read back from the box).",
+      "fields": {
+        "planning": {
+          "name": "Schedule",
+          "description": "Schedule name or number. Empty: only the list of schedules."
+        },
+        "config_entry_id": {
+          "name": "Box",
+          "description": "Only if several boxes are configured."
+        }
+      }
+    },
+    "set_planning_day": {
+      "name": "Set the ranges of a day",
+      "description": "Replaces the comfort ranges of one or more days of a schedule; the rest of the day is Eco. Box rules: at most 5 ranges, 1 hour minimum each, 1 hour minimum between two ranges.",
+      "fields": {
+        "planning": {
+          "name": "Schedule",
+          "description": "Schedule name or number."
+        },
+        "days": {
+          "name": "Days",
+          "description": "Days to change."
+        },
+        "ranges": {
+          "name": "Comfort ranges",
+          "description": "List of {start, end} ranges in HH:MM, 15-minute steps. Empty list: whole day in Eco."
+        },
+        "config_entry_id": {
+          "name": "Box",
+          "description": "Only if several boxes are configured."
+        }
+      }
+    },
+    "copy_planning_day": {
+      "name": "Copy a day",
+      "description": "Copies the comfort ranges of one day to other days of the same schedule.",
+      "fields": {
+        "planning": {
+          "name": "Schedule",
+          "description": "Schedule name or number."
+        },
+        "source_day": {
+          "name": "Day to copy",
+          "description": "Day whose ranges are copied."
+        },
+        "target_days": {
+          "name": "Days to replace",
+          "description": "Days that receive these ranges."
+        },
+        "config_entry_id": {
+          "name": "Box",
+          "description": "Only if several boxes are configured."
+        }
+      }
+    },
+    "create_planning": {
+      "name": "Create a schedule",
+      "description": "Creates an empty schedule (all Eco). Name: letters, digits and spaces, 25 characters at most.",
+      "fields": {
+        "name": {
+          "name": "Name",
+          "description": "Name of the new schedule (upper-cased, accents removed)."
+        },
+        "config_entry_id": {
+          "name": "Box",
+          "description": "Only if several boxes are configured."
+        }
+      }
+    },
+    "rename_planning": {
+      "name": "Rename a schedule",
+      "description": "Changes the name of a schedule.",
+      "fields": {
+        "planning": {
+          "name": "Schedule",
+          "description": "Schedule name or number."
+        },
+        "name": {
+          "name": "New name",
+          "description": "Letters, digits and spaces, 25 characters at most."
+        },
+        "config_entry_id": {
+          "name": "Box",
+          "description": "Only if several boxes are configured."
+        }
+      }
+    },
+    "delete_planning": {
+      "name": "Delete a schedule",
+      "description": "Deletes a schedule that no room uses.",
+      "fields": {
+        "planning": {
+          "name": "Schedule",
+          "description": "Schedule name or number."
+        },
+        "config_entry_id": {
+          "name": "Box",
+          "description": "Only if several boxes are configured."
+        }
+      }
+    }
+  }
+}

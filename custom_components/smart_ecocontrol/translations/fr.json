@@ -1,0 +1,318 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Smart ECOcontrol",
+        "description": "Adresse IP de la box Smart ECOcontrol sur le réseau de Home Assistant (la box doit être joignable depuis Home Assistant).",
+        "data": {
+          "host": "Adresse IP de la box"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossible de joindre la box à cette adresse.",
+      "invalid_response": "Cette adresse répond, mais ce n'est pas une box Smart ECOcontrol reconnue.",
+      "unknown": "Erreur inattendue, voir les journaux."
+    },
+    "abort": {
+      "already_configured": "Cette box est déjà configurée."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options de Smart ECOcontrol",
+        "data": {
+          "scan_interval": "Intervalle d'actualisation (secondes)",
+          "derogation_hours": "Durée par défaut d'une dérogation (heures, au plus jusqu'à minuit)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "climate": {
+      "radiator": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "none": "Planning",
+              "frost_protection": "Hors-gel"
+            }
+          }
+        }
+      }
+    },
+    "binary_sensor": {
+      "window_open": {
+        "name": "Fenêtre ouverte"
+      },
+      "communication_problem": {
+        "name": "Problème de communication"
+      },
+      "update_available": {
+        "name": "Mise à jour disponible"
+      }
+    },
+    "select": {
+      "planning": {
+        "name": "Planning de chauffe"
+      }
+    },
+    "sensor": {
+      "allure": {
+        "name": "Allure",
+        "state": {
+          "eco": "Éco",
+          "comfort_minus_2": "Confort -2",
+          "comfort_minus_1": "Confort -1",
+          "comfort": "Confort",
+          "off": "Arrêt",
+          "frost_protection": "Hors-gel",
+          "comfort_plus_1": "Confort +1"
+        }
+      },
+      "vacation_until": {
+        "name": "Remise en chauffe"
+      }
+    },
+    "switch": {
+      "vacation": {
+        "name": "Mode vacances"
+      }
+    }
+  },
+  "exceptions": {
+    "communication_error": {
+      "message": "Erreur de communication avec la box : {error}"
+    },
+    "setpoint_not_settable": {
+      "message": "Réglage de la consigne impossible : la pièce doit être en mode Auto sur l'allure Confort (touche Smart de l'appareil), sans fil pilote."
+    },
+    "room_selection_lost": {
+      "message": "Commande annulée par sécurité : la box ne vise plus cette pièce (une page de l'interface web ouverte ailleurs change la pièce sélectionnée). Fermez les pages de la box et réessayez."
+    },
+    "setpoint_out_of_range": {
+      "message": "Consigne de {requested} °C refusée : la box n'accepte que de {minimum} à {maximum} °C autour de la température préférée."
+    },
+    "derogation_unavailable": {
+      "message": "Dérogation « {kind} » impossible dans le mode actuel de la pièce (mode {mode}). La box n'autorise que le hors-gel hors mode Auto, et rien en mode Arrêt ou Hors-gel."
+    },
+    "derogation_unknown": {
+      "message": "Dérogation inconnue : {kind}."
+    },
+    "hvac_mode_physical": {
+      "message": "Le mode ne peut pas être changé à distance : utilisez la touche Smart de l'appareil. À distance, seules la consigne, les dérogations et le planning sont modifiables."
+    },
+    "planning_unknown": {
+      "message": "Planning inconnu : {planning}."
+    },
+    "vacation_date_invalid": {
+      "message": "Date de remise en chauffe invalide ({date}) : elle doit être postérieure à aujourd'hui (heure de la box) et dans les 12 prochains mois."
+    },
+    "config_entry_missing": {
+      "message": "Aucune box Smart ECOcontrol n'est chargée."
+    },
+    "config_entry_ambiguous": {
+      "message": "Plusieurs boxes Smart ECOcontrol : indiquez laquelle avec config_entry_id."
+    },
+    "time_invalid": {
+      "message": "Heure invalide : {value} (format HH:MM, par quarts d'heure, de 00:00 à 24:00)."
+    },
+    "planning_no_schedule": {
+      "message": "« Sans planning » n'a pas de plages : une pièce avec ce planning ne suit aucun horaire."
+    },
+    "planning_selection_lost": {
+      "message": "Écriture annulée par sécurité : la box ne décrit plus ce planning (une page de l'interface web ouverte ailleurs change le planning affiché). Fermez les pages de la box et réessayez."
+    },
+    "schedule_too_many_ranges": {
+      "message": "Au plus {maximum} plages de confort par jour."
+    },
+    "schedule_range_invalid": {
+      "message": "Plage de confort invalide ({range}) : la fin doit suivre le début, entre 00:00 et 24:00."
+    },
+    "schedule_range_too_short": {
+      "message": "Plage de confort trop courte ({range}) : 1 heure minimum."
+    },
+    "schedule_ranges_too_close": {
+      "message": "Plages de confort trop proches ({range}) : 1 heure minimum entre deux plages, sans chevauchement."
+    },
+    "schedule_day_invalid": {
+      "message": "Jour invalide : {day}."
+    },
+    "schedule_not_applied": {
+      "message": "La box n'a pas appliqué la modification (jour {day} : demandé {expected}, relu {found}). Réessayez et vérifiez le planning sur la box."
+    },
+    "planning_name_invalid": {
+      "message": "Nom de planning invalide : lettres, chiffres et espaces uniquement, {maximum} caractères au plus."
+    },
+    "planning_name_taken": {
+      "message": "Un planning s'appelle déjà « {name} »."
+    },
+    "planning_limit": {
+      "message": "La box ne gère que {maximum} plannings (« Sans planning » comprise)."
+    },
+    "planning_not_applied": {
+      "message": "La box n'a pas pris en compte la modification du planning. Réessayez ou vérifiez sur la box."
+    },
+    "planning_protected": {
+      "message": "« Sans planning » est le planning par défaut : il ne peut être ni renommé ni supprimé."
+    },
+    "planning_in_use": {
+      "message": "Le planning « {planning} » est encore utilisé par : {rooms}. Donnez d'abord un autre planning à ces pièces."
+    }
+  },
+  "selector": {
+    "derogation_allure": {
+      "options": {
+        "eco": "Éco",
+        "comfort": "Confort",
+        "frost": "Hors-gel"
+      }
+    },
+    "weekday": {
+      "options": {
+        "mon": "Lundi",
+        "tue": "Mardi",
+        "wed": "Mercredi",
+        "thu": "Jeudi",
+        "fri": "Vendredi",
+        "sat": "Samedi",
+        "sun": "Dimanche"
+      }
+    }
+  },
+  "services": {
+    "set_derogation": {
+      "name": "Forcer une allure (dérogation)",
+      "description": "Force temporairement l'allure d'une pièce, au plus jusqu'à minuit.",
+      "fields": {
+        "allure": {
+          "name": "Allure",
+          "description": "Allure à appliquer."
+        },
+        "duration": {
+          "name": "Durée",
+          "description": "Durée en heures. Par défaut : la durée réglée dans les options de l'intégration."
+        }
+      }
+    },
+    "cancel_derogation": {
+      "name": "Annuler la dérogation",
+      "description": "Supprime la dérogation en cours et revient au planning."
+    },
+    "set_vacation": {
+      "name": "Programmer les vacances",
+      "description": "Met tous les radiateurs en hors-gel jusqu'à la date choisie, puis les remet en chauffe.",
+      "fields": {
+        "until": {
+          "name": "Remise en chauffe",
+          "description": "Date de remise en chauffe (demain au plus tôt, dans les 12 mois)."
+        }
+      }
+    },
+    "get_planning": {
+      "name": "Lire un planning",
+      "description": "Renvoie la liste des plannings et, si un planning est indiqué, ses plages de confort (relues sur la box).",
+      "fields": {
+        "planning": {
+          "name": "Planning",
+          "description": "Nom ou numéro du planning. Sans valeur : seulement la liste des plannings."
+        },
+        "config_entry_id": {
+          "name": "Box",
+          "description": "Seulement si plusieurs boxes sont configurées."
+        }
+      }
+    },
+    "set_planning_day": {
+      "name": "Modifier les plages d'un jour",
+      "description": "Remplace les plages de confort de un ou plusieurs jours d'un planning ; le reste de la journée est en Éco. Règles de la box : 5 plages au plus, 1 heure minimum chacune, 1 heure minimum entre deux plages.",
+      "fields": {
+        "planning": {
+          "name": "Planning",
+          "description": "Nom ou numéro du planning."
+        },
+        "days": {
+          "name": "Jours",
+          "description": "Jours à modifier."
+        },
+        "ranges": {
+          "name": "Plages de confort",
+          "description": "Liste de plages {start, end} en HH:MM par quarts d'heure. Liste vide : toute la journée en Éco."
+        },
+        "config_entry_id": {
+          "name": "Box",
+          "description": "Seulement si plusieurs boxes sont configurées."
+        }
+      }
+    },
+    "copy_planning_day": {
+      "name": "Copier un jour",
+      "description": "Copie les plages de confort d'un jour vers d'autres jours du même planning.",
+      "fields": {
+        "planning": {
+          "name": "Planning",
+          "description": "Nom ou numéro du planning."
+        },
+        "source_day": {
+          "name": "Jour à copier",
+          "description": "Jour dont on reprend les plages."
+        },
+        "target_days": {
+          "name": "Jours à remplacer",
+          "description": "Jours qui reçoivent ces plages."
+        },
+        "config_entry_id": {
+          "name": "Box",
+          "description": "Seulement si plusieurs boxes sont configurées."
+        }
+      }
+    },
+    "create_planning": {
+      "name": "Créer un planning",
+      "description": "Crée un planning vide (tout en Éco). Nom : lettres, chiffres et espaces, 25 caractères au plus.",
+      "fields": {
+        "name": {
+          "name": "Nom",
+          "description": "Nom du nouveau planning (mis en majuscules sans accents)."
+        },
+        "config_entry_id": {
+          "name": "Box",
+          "description": "Seulement si plusieurs boxes sont configurées."
+        }
+      }
+    },
+    "rename_planning": {
+      "name": "Renommer un planning",
+      "description": "Change le nom d'un planning.",
+      "fields": {
+        "planning": {
+          "name": "Planning",
+          "description": "Nom ou numéro du planning."
+        },
+        "name": {
+          "name": "Nouveau nom",
+          "description": "Lettres, chiffres et espaces, 25 caractères au plus."
+        },
+        "config_entry_id": {
+          "name": "Box",
+          "description": "Seulement si plusieurs boxes sont configurées."
+        }
+      }
+    },
+    "delete_planning": {
+      "name": "Supprimer un planning",
+      "description": "Supprime un planning qu'aucune pièce n'utilise.",
+      "fields": {
+        "planning": {
+          "name": "Planning",
+          "description": "Nom ou numéro du planning."
+        },
+        "config_entry_id": {
+          "name": "Box",
+          "description": "Seulement si plusieurs boxes sont configurées."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<response>
+
+	<liste_prog>
+	
+		<prog id="1">
+			<nom_prog><![CDATA[Sans planning]]></nom_prog>
+			<liste_pieces_prog>NULL</liste_pieces_prog>
+		</prog>
+		
+		<prog id="2">
+			<nom_prog><![CDATA[Chauffage HS]]></nom_prog>
+			<liste_pieces_prog><![CDATA[CHAMBRE RDC]]></liste_pieces_prog>
+		</prog>
+		
+		<prog id="3">
+			<nom_prog><![CDATA[Ch semaine WK]]></nom_prog>
+			<liste_pieces_prog>NULL</liste_pieces_prog>
+		</prog>
+		
+		<prog id="4">
+			<nom_prog><![CDATA[Chambre Semaine]]></nom_prog>
+			<liste_pieces_prog>NULL</liste_pieces_prog>
+		</prog>
+		
+		<prog id="5">
+			<nom_prog><![CDATA[SALON]]></nom_prog>
+			<liste_pieces_prog>NULL</liste_pieces_prog>
+		</prog>
+		
+		<prog id="6">
+			<nom_prog><![CDATA[Couloir Haut]]></nom_prog>
+			<liste_pieces_prog>NULL</liste_pieces_prog>
+		</prog>
+		
+		<prog id="7">
+			<nom_prog><![CDATA[CH bas WK]]></nom_prog>
+			<liste_pieces_prog>NULL</liste_pieces_prog>
+		</prog>
+		
+		<prog id="8">
+			<nom_prog><![CDATA[ch bas ]]></nom_prog>
+			<liste_pieces_prog>NULL</liste_pieces_prog>
+		</prog>
+		
+		<prog id="9">
+			<nom_prog><![CDATA[Chambre bas vac]]></nom_prog>
+			<liste_pieces_prog><![CDATA[CHAMBRE BAS]]></liste_pieces_prog>
+		</prog>
+		
+		<prog id="10">
+			<nom_prog><![CDATA[HAUT VACANCES]]></nom_prog>
+			<liste_pieces_prog><![CDATA[COULOIR HAUT]]></liste_pieces_prog>
+		</prog>
+		
+		<prog id="11">
+			<nom_prog><![CDATA[SALON VACANCES]]></nom_prog>
+			<liste_pieces_prog><![CDATA[SALON]]></liste_pieces_prog>
+		</prog>
+		
+		<prog id="12">
+			<nom_prog>NULL</nom_prog>
+			<liste_pieces_prog>NULL</liste_pieces_prog>
+		</prog>
+		
+		<prog id="13">
+			<nom_prog>NULL</nom_prog>
+			<liste_pieces_prog>NULL</liste_pieces_prog>
+		</prog>
+		
+		<prog id="14">
+			<nom_prog>NULL</nom_prog>
+			<liste_pieces_prog>NULL</liste_pieces_prog>
+		</prog>
+		
+	</liste_prog>
+	
+</response>

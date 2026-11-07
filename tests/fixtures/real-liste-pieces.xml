@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<response>
+
+	<liste_pieces>
+	
+		<th_non_assignes><th>10</th>
+</th_non_assignes>
+			
+		<piece id="2">
+			<nom_piece><![CDATA[SALON]]></nom_piece>
+			<thermostats><th>22</th>
+<th>20</th>
+</thermostats>
+		</piece>
+		
+		<piece id="3">
+			<nom_piece><![CDATA[CHAMBRE BAS]]></nom_piece>
+			<thermostats><th>30</th>
+</thermostats>
+		</piece>
+		
+		<piece id="4">
+			<nom_piece><![CDATA[COULOIR HAUT]]></nom_piece>
+			<thermostats><th>41</th>
+</thermostats>
+		</piece>
+		
+		<piece id="5">
+			<nom_piece><![CDATA[CHAMBRE RDC]]></nom_piece>
+			<thermostats><th>50</th>
+</thermostats>
+		</piece>
+		
+		<piece id="6">
+			<nom_piece>NULL</nom_piece>
+			<thermostats>NULL</thermostats>
+		</piece>
+		
+		<piece id="7">
+			<nom_piece>NULL</nom_piece>
+			<thermostats>NULL</thermostats>
+		</piece>
+		
+		<piece id="8">
+			<nom_piece>NULL</nom_piece>
+			<thermostats>NULL</thermostats>
+		</piece>
+		
+		<piece id="9">
+			<nom_piece>NULL</nom_piece>
+			<thermostats>NULL</thermostats>
+		</piece>
+		
+		<piece id="10">
+			<nom_piece>NULL</nom_piece>
+			<thermostats>NULL</thermostats>
+		</piece>
+		
+		<piece id="11">
+			<nom_piece>NULL</nom_piece>
+			<thermostats>NULL</thermostats>
+		</piece>
+		
+		<piece id="12">
+			<nom_piece>NULL</nom_piece>
+			<thermostats>NULL</thermostats>
+		</piece>
+		
+		<piece id="13">
+			<nom_piece>NULL</nom_piece>
+			<thermostats>NULL</thermostats>
+		</piece>
+		
+		<piece id="14">
+			<nom_piece>NULL</nom_piece>
+			<thermostats>NULL</thermostats>
+		</piece>
+		
+	</liste_pieces>
+	
+</response>

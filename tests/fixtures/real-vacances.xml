@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<response>
+
+	<hors_gel_permanent>0</hors_gel_permanent>
+
+	<status_vacances>
+		<vacancesActive>0</vacancesActive>
+		<vacancesAnnee>2019</vacancesAnnee>
+		<vacancesMois>4</vacancesMois>
+		<vacancesJour>27</vacancesJour>
+	</status_vacances>
+	
+</response>

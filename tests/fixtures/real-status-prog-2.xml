@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<response>
+	
+	<prog>
+	
+		<id_prog>2</id_prog>
+	
+		<jour_prog id="0">
+		
+			<point_prog id="0">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="1">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="2">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="3">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="4">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+		</jour_prog>
+		
+		<jour_prog id="1">
+		
+			<point_prog id="0">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="1">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="2">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="3">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="4">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+		</jour_prog>
+		
+		<jour_prog id="2">
+		
+			<point_prog id="0">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="1">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="2">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="3">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="4">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+		</jour_prog>
+		
+		<jour_prog id="3">
+		
+			<point_prog id="0">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="1">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="2">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="3">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="4">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+		</jour_prog>
+		
+		<jour_prog id="4">
+		
+			<point_prog id="0">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="1">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="2">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="3">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="4">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+		</jour_prog>
+		
+		<jour_prog id="5">	
+		
+			<point_prog id="0">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="1">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="2">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="3">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="4">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+		</jour_prog>
+		
+		<jour_prog id="6">	
+		
+			<point_prog id="0">
+				<heureDebut>32</heureDebut>
+				<heureFin>88</heureFin>
+			</point_prog>
+			
+			<point_prog id="1">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="2">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="3">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+			<point_prog id="4">
+				<heureDebut>NULL</heureDebut>
+				<heureFin>NULL</heureFin>
+			</point_prog>
+			
+		</jour_prog>
+		
+	</prog>
+	
+</response>

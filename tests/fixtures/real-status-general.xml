@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<response>
+
+	<premiere_connexion>0</premiere_connexion>
+	<init_en_cours>0</init_en_cours>
+	<rf_present>1</rf_present>
+	<etat_wifi>2</etat_wifi>
+	<etat_tic>0</etat_tic>
+	<tarif_avec_pointe>0</tarif_avec_pointe>
+	<autre_equipement>0</autre_equipement>
+	<connect_internet>0</connect_internet>
+	<maj_ok>1</maj_ok>
+	<v_interface>106</v_interface>
+	<v_app>216</v_app>
+	
+</response>

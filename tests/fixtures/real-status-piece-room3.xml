@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<reponse>
+
+	<reponse_piece>
+	
+		<id_piece>3</id_piece>
+		<prog_piece>9</prog_piece>
+		<nom_piece><![CDATA[CHAMBRE BAS]]></nom_piece>
+		<allure_piece>3</allure_piece>
+		<mode_piece>7</mode_piece>
+		<consigne_piece>18.0</consigne_piece>
+		<consigne_preferee>18.0</consigne_preferee>
+		<encardrement_temp_plus>2</encardrement_temp_plus>
+		<encardrement_temp_moins>2</encardrement_temp_moins>
+		<fenetre_piece>1</fenetre_piece>
+		<presence_piece>1</presence_piece>
+		<verrou_piece>0</verrou_piece>
+		<fp6_piece></fp6_piece>
+		
+		<derog_piece>0</derog_piece>
+		<allure_derog>3</allure_derog>
+		<heure_debut_derog>43</heure_debut_derog>
+		<heure_fin_derog>68</heure_fin_derog>
+		
+	</reponse_piece>
+
+	
+</reponse>
