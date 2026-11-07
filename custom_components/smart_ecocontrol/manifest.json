@@ -1,13 +1,19 @@
 {
   "domain": "smart_ecocontrol",
   "name": "Smart ECOcontrol",
+  "after_dependencies": [
+    "lovelace"
+  ],
   "codeowners": [],
   "config_flow": true,
-  "dependencies": ["frontend", "http"],
+  "dependencies": [
+    "frontend",
+    "http"
+  ],
   "documentation": "https://github.com/VOTRE_COMPTE/ha-smart-ecocontrol",
   "integration_type": "hub",
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/VOTRE_COMPTE/ha-smart-ecocontrol/issues",
   "requirements": [],
-  "version": "0.3.1"
+  "version": "0.3.2"
 }

@@ -10,6 +10,7 @@ from homeassistant.components.http import StaticPathConfig
 from homeassistant.const import CONF_HOST, Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import device_registry as dr
+from homeassistant.helpers.start import async_at_started
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.typing import ConfigType
 from homeassistant.loader import async_get_integration
@@ -46,12 +47,50 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
                 for url, name in zip(urls, CARD_FILES, strict=True)
             ]
         )
-        for url in urls:
-            # ?v=... : le navigateur recharge la carte après une mise à jour
-            add_extra_js_url(hass, f"{url}?v={integration.version}")
+        # ?v=... : le navigateur recharge la carte après une mise à jour
+        versioned = [f"{url}?v={integration.version}" for url in urls]
+        for url in versioned:
+            add_extra_js_url(hass, url)
+
+        async def _register(_hass: HomeAssistant) -> None:
+            await _async_register_lovelace_resources(hass, versioned)
+
+        async_at_started(hass, _register)
     except Exception:  # noqa: BLE001 - les cartes sont un confort, jamais bloquantes
         _LOGGER.warning("Cartes Smart ECOcontrol non chargées dans l'interface", exc_info=True)
     return True
+
+
+async def _async_register_lovelace_resources(hass: HomeAssistant, urls: list[str]) -> None:
+    """Inscrit les cartes dans les ressources des tableaux de bord.
+
+    C'est ce que fait HACS pour les cartes : l'interface charge alors les cartes
+    même si la page a gardé une ancienne version de son index en cache. Sans effet si
+    les ressources sont gérées en YAML (dans ce cas, ajoutez-les dans configuration.yaml).
+    """
+    try:
+        data = hass.data.get("lovelace")
+        resources = getattr(data, "resources", None)
+        if resources is None or getattr(data, "resource_mode", "storage") != "storage":
+            return
+        if not resources.loaded:
+            await resources.async_load()
+            resources.loaded = True
+        for url in urls:
+            path = url.split("?", 1)[0]
+            known = [item for item in resources.async_items() if item["url"].split("?", 1)[0] == path]
+            if not known:
+                await resources.async_create_item({"res_type": "module", "url": url})
+                _LOGGER.info("Carte ajoutée aux ressources des tableaux de bord : %s", url)
+            elif known[0]["url"] != url or known[0].get("type") != "module":
+                await resources.async_update_item(known[0]["id"], {"res_type": "module", "url": url})
+                _LOGGER.info("Ressource de carte mise à jour : %s", url)
+    except Exception:  # noqa: BLE001 - confort : jamais bloquant
+        _LOGGER.warning(
+            "Impossible d'ajouter les cartes aux ressources : ajoutez-les à la main "
+            "(Paramètres > Tableaux de bord > Ressources)",
+            exc_info=True,
+        )
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: EcoControlConfigEntry) -> bool:
