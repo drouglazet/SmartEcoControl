@@ -1,10 +1,11 @@
-"""Capteurs : allure courante d'une pièce, date de remise en chauffe."""
+"""Capteurs : allure et consigne d'une pièce, date de remise en chauffe."""
 
 from __future__ import annotations
 
 from datetime import date
 
-from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
+from homeassistant.components.sensor import SensorDeviceClass, SensorEntity, SensorStateClass
+from homeassistant.const import UnitOfTemperature
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
@@ -21,6 +22,7 @@ async def async_setup_entry(
     coordinator = entry.runtime_data
     entities: list[SensorEntity] = [VacationUntilSensor(coordinator)]
     entities.extend(AllureSensor(coordinator, room_id) for room_id in coordinator.data.rooms)
+    entities.extend(SetpointSensor(coordinator, room_id) for room_id in coordinator.data.rooms)
     async_add_entities(entities)
 
 
@@ -38,6 +40,27 @@ class AllureSensor(EcoControlRoomEntity, SensorEntity):
     def native_value(self) -> str | None:
         status = self.status
         return None if status is None else ALLURE_NAMES.get(status.effective_allure)
+
+
+class SetpointSensor(EcoControlRoomEntity, SensorEntity):
+    """Consigne de température de la pièce, telle que la box la renvoie.
+
+    Contrairement à l'entité `climate`, la valeur reste visible quand la box n'affiche
+    qu'un mot (Éco, Hors-gel...) : elle convient aux courbes d'historique.
+    """
+
+    _attr_device_class = SensorDeviceClass.TEMPERATURE
+    _attr_native_unit_of_measurement = UnitOfTemperature.CELSIUS
+    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_translation_key = "setpoint"
+
+    def __init__(self, coordinator: EcoControlCoordinator, room_id: str) -> None:
+        super().__init__(coordinator, room_id, "setpoint")
+
+    @property
+    def native_value(self) -> float | None:
+        status = self.status
+        return None if status is None else status.setpoint
 
 
 class VacationUntilSensor(EcoControlBoxEntity, SensorEntity):

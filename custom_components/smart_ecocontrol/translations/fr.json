@@ -73,6 +73,9 @@
       },
       "vacation_until": {
         "name": "Remise en chauffe"
+      },
+      "setpoint": {
+        "name": "Consigne"
       }
     },
     "switch": {

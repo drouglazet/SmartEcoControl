@@ -73,6 +73,9 @@
       },
       "vacation_until": {
         "name": "Heating resumes"
+      },
+      "setpoint": {
+        "name": "Setpoint"
       }
     },
     "switch": {
