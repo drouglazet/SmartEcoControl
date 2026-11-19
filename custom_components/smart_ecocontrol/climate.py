@@ -47,6 +47,11 @@ from .const import (
 from .coordinator import EcoControlConfigEntry, EcoControlCoordinator
 from .entity import EcoControlRoomEntity
 
+# Depuis HA 2026.11, les températures d'un thermostat portent le préfixe « native_ »
+# (les anciens noms sont retirés en 2027.11). Les HA plus anciens ne connaissent que
+# les anciens noms : on s'adapte à celui sur lequel on tourne.
+_NATIVE_TEMPERATURES = hasattr(ClimateEntity, "native_target_temperature")
+
 PRESET_TO_KIND = {PRESET_ECO: "eco", PRESET_COMFORT: "comfort", PRESET_FROST: "frost"}
 KIND_TO_PRESET = {kind: preset for preset, kind in PRESET_TO_KIND.items()}
 
@@ -80,9 +85,13 @@ async def async_setup_entry(
 class EcoControlClimate(EcoControlRoomEntity, ClimateEntity):
     _attr_name = None
     _attr_translation_key = "radiator"
-    _attr_temperature_unit = UnitOfTemperature.CELSIUS
     _attr_target_temperature_step = 0.1
     _attr_preset_modes = [PRESET_NONE, PRESET_ECO, PRESET_COMFORT, PRESET_FROST]
+
+    if _NATIVE_TEMPERATURES:
+        _attr_native_temperature_unit = UnitOfTemperature.CELSIUS
+    else:  # HA < 2026.11
+        _attr_temperature_unit = UnitOfTemperature.CELSIUS
 
     def __init__(self, coordinator: EcoControlCoordinator, room_id: str) -> None:
         super().__init__(coordinator, room_id, "climate")
@@ -115,13 +124,24 @@ class EcoControlClimate(EcoControlRoomEntity, ClimateEntity):
         mode = self.hvac_mode
         return [mode] if mode is not None else []
 
-    @property
-    def target_temperature(self) -> float | None:
+    def _displayed_setpoint(self) -> float | None:
         status = self.status
         # La box n'affiche pas de température en Eco, Hors-gel, Confort -1/-2...
         if status is None or not status.shows_setpoint:
             return None
         return status.setpoint
+
+    if _NATIVE_TEMPERATURES:
+
+        @property
+        def native_target_temperature(self) -> float | None:
+            return self._displayed_setpoint()
+
+    else:  # HA < 2026.11
+
+        @property
+        def target_temperature(self) -> float | None:
+            return self._displayed_setpoint()
 
     @property
     def min_temp(self) -> float:
