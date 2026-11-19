@@ -99,14 +99,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: EcoControlConfigEntry) -
     await coordinator.async_config_entry_first_refresh()
     entry.runtime_data = coordinator
 
-    # Appareil « box » : les pièces y sont rattachées (via_device)
-    dr.async_get(hass).async_get_or_create(
+    # Appareil « box » : les pièces y sont rattachées (appareil parent)
+    box_device = dr.async_get(hass).async_get_or_create(
         config_entry_id=entry.entry_id,
         identifiers={(DOMAIN, entry.entry_id)},
         name="Smart ECOcontrol",
         model="Smart ECOcontrol",
         configuration_url=f"http://{entry.data[CONF_HOST]}",
     )
+    coordinator.box_device_id = box_device.id
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     entry.async_on_unload(entry.add_update_listener(_async_reload_on_options))

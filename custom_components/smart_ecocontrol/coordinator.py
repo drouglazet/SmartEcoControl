@@ -48,6 +48,8 @@ class EcoControlCoordinator(DataUpdateCoordinator[BoxSnapshot]):
             ),
         )
         self.client = client
+        # identifiant de l'appareil « box » dans le registre, renseigné au démarrage
+        self.box_device_id: str | None = None
 
     async def _async_update_data(self) -> BoxSnapshot:
         previous = self.data.statuses if self.data else None

@@ -9,6 +9,10 @@ from .api import RoomStatus
 from .const import DOMAIN
 from .coordinator import EcoControlCoordinator
 
+# Home Assistant récent : `via_device` (identifiant) est remplacé par `via_device_id`
+# (identifiant de l'appareil parent dans le registre) ; l'ancien nom disparaît en 2027.8.
+_VIA_DEVICE_ID_SUPPORTED = "via_device_id" in DeviceInfo.__annotations__
+
 
 class EcoControlBoxEntity(CoordinatorEntity[EcoControlCoordinator]):
     """Entité rattachée à la box elle-même."""
@@ -35,12 +39,16 @@ class EcoControlRoomEntity(CoordinatorEntity[EcoControlCoordinator]):
         self._room_id = room_id
         self._attr_unique_id = f"{entry_id}_{room_id}_{key}"
         room = coordinator.data.rooms.get(room_id)
-        self._attr_device_info = DeviceInfo(
+        info = DeviceInfo(
             identifiers={(DOMAIN, f"{entry_id}_{room_id}")},
             name=room.name if room else f"Pièce {room_id}",
             model="Pièce",
-            via_device=(DOMAIN, entry_id),
         )
+        if _VIA_DEVICE_ID_SUPPORTED and coordinator.box_device_id:
+            info["via_device_id"] = coordinator.box_device_id
+        else:
+            info["via_device"] = (DOMAIN, entry_id)
+        self._attr_device_info = info
 
     @property
     def status(self) -> RoomStatus | None:
